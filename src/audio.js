@@ -109,3 +109,38 @@ export function stopMusic() {
     _master.gain.linearRampToValueAtTime(0, now + 0.8);
   }
 }
+
+export function playEatSound() {
+  _ensureCtx();
+  const now = _ctx.currentTime;
+  const osc = _ctx.createOscillator();
+  const env = _ctx.createGain();
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(520, now);
+  osc.frequency.exponentialRampToValueAtTime(1040, now + 0.12);
+  env.gain.setValueAtTime(0.45, now);
+  env.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+  osc.connect(env);
+  env.connect(_ctx.destination);
+  osc.start(now);
+  osc.stop(now + 0.2);
+}
+
+export function playGameOverSound() {
+  _ensureCtx();
+  const now = _ctx.currentTime;
+  const notes = [440, 349.23, 293.66, 220];
+  notes.forEach((freq, i) => {
+    const t = now + i * 0.18;
+    const osc = _ctx.createOscillator();
+    const env = _ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(freq, t);
+    env.gain.setValueAtTime(0.35, t);
+    env.gain.exponentialRampToValueAtTime(0.001, t + 0.32);
+    osc.connect(env);
+    env.connect(_ctx.destination);
+    osc.start(t);
+    osc.stop(t + 0.35);
+  });
+}

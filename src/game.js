@@ -5,7 +5,7 @@ import {
   drawBackground, drawFish, drawUI,
   drawStartScreen, drawGameOverScreen,
 } from './renderer.js';
-import { startMusic, stopMusic } from './audio.js';
+import { startMusic, stopMusic, playEatSound, playGameOverSound } from './audio.js';
 
 const FISH_COUNT = 12;
 const PREDATOR_MIN = 2; // try to keep at least this many dangerous fish on screen
@@ -76,9 +76,11 @@ export class Game {
         fish.active = false;
         this.score += Math.ceil(fish.radius);
         this.player.eat();
+        playEatSound();
       } else if (fish.radius > this.player.radius * 1.15 && fish.spawnGrace <= 0) {
         this.state = 'gameover';
         stopMusic();
+        playGameOverSound();
         return;
       }
     }

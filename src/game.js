@@ -36,10 +36,10 @@ export class Game {
     this.player = null;
     this.fishes = [];
 
-    window.addEventListener('keydown', () => this._onAnyKey());
+    window.addEventListener('keydown', (e) => { if (e.code === 'Space') this._onSpaceKey(); });
   }
 
-  _onAnyKey() {
+  _onSpaceKey() {
     if (this.state === 'start' || this.state === 'gameover') {
       this._startGame();
     }

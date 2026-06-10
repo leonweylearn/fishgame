@@ -73,7 +73,7 @@ export function drawStartScreen(ctx, width, height) {
 
   ctx.font = 'bold 26px Arial, sans-serif';
   ctx.fillStyle = '#4fc3f7';
-  ctx.fillText('按任意键开始', width / 2, height / 2 + 100);
+  ctx.fillText('按空格键开始', width / 2, height / 2 + 100);
 }
 
 export function drawGameOverScreen(ctx, score, width, height) {
@@ -91,5 +91,5 @@ export function drawGameOverScreen(ctx, score, width, height) {
 
   ctx.font = 'bold 22px Arial, sans-serif';
   ctx.fillStyle = '#4fc3f7';
-  ctx.fillText('按任意键重新开始', width / 2, height / 2 + 75);
+  ctx.fillText('按空格键重新开始', width / 2, height / 2 + 75);
 }
